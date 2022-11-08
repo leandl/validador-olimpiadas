@@ -1,4 +1,4 @@
-from types import List
+from typing import List
 from src.test import Test
 
 class Question:
@@ -8,7 +8,7 @@ class Question:
         self.__tests = tests
 
     def get_name(self) -> str:
-        return self.__tests
+        return self.__name
 
     def get_tests(self) -> List[Test]:
         return self.__tests
