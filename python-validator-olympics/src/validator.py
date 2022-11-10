@@ -28,10 +28,10 @@ class Validator:
 
         for test in question.get_tests():
             print("=====================")
-            print(f"Args: {test.get_agrs()}")
+            print(f"Args: {test.get_args()}")
             print(f"Expected Result: {test.get_result()}")
 
-            result = question_def(*test.get_agrs())
+            result = question_def(*test.get_args())
             print(f"Result: {result}")
 
 
