@@ -29,15 +29,16 @@ class Validator{
             throw new ValidatorException("Function doesn't exists.");
         }
 
+        $response = [];
+
         foreach($question->getTests() as $test){
             $args = $test->getArgs();
             $results = $questionFunction(...$test->getArgs());
             $args = implode(',',$args);
-            echo "=====================\n";
-            echo "Args: {$args}\n";
-            echo "Result: {$results}\n";
+            $response[$nameQuestion][] = ['args' => $args, 'results' => $results];
         }
         
+        echo json_encode($response);
     }
 
     
