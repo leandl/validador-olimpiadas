@@ -1,0 +1,11 @@
+"""
+Nome: {name}
+Descrição: {description}
+
+Paramatros: 
+{params-description}
+
+Retorno: {type-return}
+"""
+def {name-question}({params}) -> {type-return}:
+    return None

@@ -1,0 +1,15 @@
+<?php
+
+/*
+Nome: {name}
+Descrição: {description}
+
+Paramatros: 
+{params-description}
+
+Retorno: {type-return}
+*/
+function {name-question}({params}) 
+{
+    return;
+}
