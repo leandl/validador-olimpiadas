@@ -7,9 +7,5 @@ class SupporttedLangs(Enum):
 
   @staticmethod
   def all_langs(): 
-    return [
-      SupporttedLangs.JAVASCRIPT.value,
-      SupporttedLangs.PHP.value,
-      SupporttedLangs.PYTHON.value
-    ]
+    return [lang.value for lang in (SupporttedLangs)] 
   
