@@ -1,0 +1,16 @@
+/*
+  Nome: {name}
+  Descrição: {description}
+  
+  Paramatros: 
+  {params-description}
+
+  Retorno: {type-return}
+*/
+function {number-question}({params}) {
+    return;
+}
+
+module.exports = {
+    {number-question}
+} 
