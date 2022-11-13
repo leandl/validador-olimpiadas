@@ -1,11 +1,13 @@
-from typing import Dict, List
+from typing import List
 
 from .command import Command
+from .list_commands import ListCommands
 
 class Terminal:
 
-  def __init__(self, commands: Dict[str, Command]) -> None:
-    self.__commands = commands
+  def __init__(self, list_commands: ListCommands) -> None:
+    self.__commands = list_commands.get_commands()
+    self.__command_invalid = list_commands.get_command_invalid()
 
   def __check_command_valid_by_args(
     self,
@@ -29,7 +31,7 @@ class Terminal:
     commands = self.__commands
     command_valids = [
       command
-      for command in commands.values()
+      for command in commands
       if len(command.get_args()) == len(args)
     ]
   
@@ -37,7 +39,7 @@ class Terminal:
       if self.__check_command_valid_by_args(args, command):
         return command
 
-    return commands["command-invalid"]
+    return self.__command_invalid
   
   def run(self):
     while True:

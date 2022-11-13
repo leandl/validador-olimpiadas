@@ -9,7 +9,7 @@ Paramatros:
 
 Retorno: {type-return}
 */
-function {name-question}({params}) 
+function {name-question}({params})
 {
     return;
 }

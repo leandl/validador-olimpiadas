@@ -1,0 +1,72 @@
+[
+    {
+        "name": "Somatorio",
+        "description": "Soma entre a + b",
+        "type-result": "INTEGER",
+        "params": [
+            {
+            "name": "a",
+            "type": "INTEGER",
+            "description": "Um número qualquer"
+            },
+            {
+            "name": "b",
+            "type": "INTEGER",
+            "description": "Um número qualquer"
+            }
+        ],  
+        "tests": [
+            {
+                "args": [1, 5],
+                "result": 6
+            },
+            {
+                "args": [2, 7],
+                "result": 9
+            },
+            {
+                "args": [3, 1],
+                "result": 4
+            },
+            {
+                "args": [-1, 2],
+                "result": 1
+            }
+        ]
+    },
+    {
+        "name": "Mutiplicação",
+        "description": "Mutiplicação entre a * b",
+        "type-result": "INTEGER",
+        "params": [
+            {
+            "name": "a",
+            "type": "INTEGER",
+            "description": "Um número qualquer"
+            },
+            {
+            "name": "b",
+            "type": "INTEGER",
+            "description": "Um número qualquer"
+            }
+        ],  
+        "tests": [
+            {
+                "args": [1, 5],
+                "result": 5
+            },
+            {
+                "args": [2, 7],
+                "result": 14
+            },
+            {
+                "args": [3, 1],
+                "result": 3
+            },
+            {
+                "args": [-1, 2],
+                "result": -2
+            }
+        ]
+    }
+]

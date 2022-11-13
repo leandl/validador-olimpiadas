@@ -1,3 +1,4 @@
+from typing import Tuple
 from os import path
 
 from .generator_file import GeneratorFile
@@ -33,8 +34,10 @@ class GeneratorPythonFile(GeneratorFile):
     return "\n".join([self.__convert_param_description(param) for param in params])
 
 
-  def generate(self, number_question: int, question) -> str:
-    name_question = f"question{number_question}"
+  def generate(self, number_question: int, question) -> Tuple[str, str]:
+    name_file = f"question_{number_question}.py"
+    name_question = f"question_{number_question}"
+
     type_result = self.__convert_type(question["type-result"])
     params_description = self.__convert_params_description(question["params"])
     params_function = self.__convert_params_function(question["params"])
@@ -46,4 +49,4 @@ class GeneratorPythonFile(GeneratorFile):
     new_file = new_file.replace("{name-question}", name_question)
     new_file = new_file.replace("{params}", params_function)
 
-    return new_file
+    return name_file, new_file
