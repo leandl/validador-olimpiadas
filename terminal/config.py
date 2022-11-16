@@ -5,6 +5,7 @@ root_dirname_project_validator = path.abspath(path.join(root_dirname, pardir))
 root_dirname_generate_setup = path.abspath(path.join(root_dirname_project_validator, "generate-setup"))
 
 path_file_json_data = path.join(root_dirname_project_validator, "data.json")
+path_file_json_config = path.join(root_dirname_project_validator, "config.json")
 
 class Config:
   path = {
@@ -13,5 +14,6 @@ class Config:
   }
 
   file = {
-    "JSON-DATA": path_file_json_data
+    "JSON-DATA": path_file_json_data,
+    "CONFIG": path_file_json_config
   }

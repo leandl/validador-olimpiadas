@@ -1,0 +1,7 @@
+{
+    "run" : {
+        "php": "php",
+        "python" : "python3",
+        "javascript": "node"
+    }
+}

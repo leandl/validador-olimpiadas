@@ -22,7 +22,6 @@ class Terminal:
 
 
         param = {}
-        print(opts)
         for opt, arg in opts:
             param[opt] = arg
 
@@ -36,7 +35,6 @@ class Terminal:
 
         if '-l' in param or '--lang' in param:
             lang = str(param['-c'] if ('-c' in param) else param['--lang'])
-            print(f'--lang: {lang}')
         
         return {
             "lang": lang

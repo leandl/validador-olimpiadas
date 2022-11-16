@@ -2,6 +2,13 @@ from typing import List
 
 from .command import Command
 from .list_commands import ListCommands
+from .terminal_messages import TerminalMessages
+
+message_type = {
+  "DEFAULT": TerminalMessages.message,
+  "ERROR" : TerminalMessages.error,
+  "SUCCESS" : TerminalMessages.success
+}
 
 class Terminal:
 
@@ -50,4 +57,5 @@ class Terminal:
       action = command.get_action()
 
       t, result = action(args)
-      print(result)
+
+      message_type[t](result)
