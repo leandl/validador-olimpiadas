@@ -1,7 +1,9 @@
+import os
 from typing import List
 
 from entities.list_commands import ListCommands
 from entities.supportted_langs import SupporttedLangs
+from config import Config
 
 list_commands = ListCommands()
 
@@ -29,9 +31,12 @@ def validator_all(args: List[str]):
 @list_commands.add(["generate", "setup", valid_support_lang])
 def generate_setup(args: List[str]):
   lang = args[2]
+  path_file_generate_setup = Config.path["GENERATE-SETUP"] + "/main.py"
+
+  response = str((os.popen(f"python3 {path_file_generate_setup} --lang={lang}").read()))
   return (
     "NAO-SEI",
-    lang
+    response
   )
 
 
