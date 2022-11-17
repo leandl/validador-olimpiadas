@@ -17,7 +17,7 @@
         ],  
         "tests": [
             {
-                "args": [1, 5],
+                "args": [1,5],
                 "result": 6
             },
             {
@@ -66,6 +66,24 @@
             {
                 "args": [-1, 2],
                 "result": -2
+            }
+        ]
+    },
+    {
+        "name": "Mutiplicação",
+        "description": "Mutiplicação entre a * b",
+        "type-result": "INTEGER",
+        "params": [
+            {
+            "name": "a",
+            "type": "INTEGER-ARRAY",
+            "description": "Um número qualquer"
+            }
+        ],  
+        "tests": [
+            {
+                "args": [[1, 5]],
+                "result": 6
             }
         ]
     }

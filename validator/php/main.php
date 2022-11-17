@@ -10,7 +10,7 @@ if(!isset($argv[1]) || !$argv[2]){
 $questionArg = $argv[1];
 $method = $argv[2];
 
-$jsonQuestions = json_decode(file_get_contents(__DIR__ .'/data.json'));
+$jsonQuestions = json_decode(file_get_contents(__DIR__ .'/../../data.json'));
 $questions = [];
 
 foreach($jsonQuestions as $keyQuestion => $question){
@@ -21,4 +21,5 @@ foreach($jsonQuestions as $keyQuestion => $question){
 }
 
 $validator = new Validator($questions);
-$validator->$method($questionArg);
+$result = $validator->$method($questionArg);
+echo json_encode($result);

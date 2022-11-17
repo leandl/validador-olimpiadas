@@ -12,6 +12,8 @@ class GeneratorPHPFile(GeneratorFile):
   def __convert_type(self, param_type):
     if param_type == "INTEGER":
       return "int"
+    if param_type == "INTEGER-ARRAY":
+      return "array"
 
     return "string"
     

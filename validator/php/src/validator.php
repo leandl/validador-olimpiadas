@@ -1,12 +1,20 @@
 <?php
 include_once __DIR__ . '/question.php';
-include_once __DIR__ . '/../exam/question_1.php';
+
+$files = scandir(__DIR__.'/../../../exam');
+$questionsDef = [];
+foreach($files as $file){
+    if(substr($file, -4) == '.php'){
+        include_once __DIR__.'/../../../exam/' . $file;
+        $aux = str_replace(".php", "", $file);
+        $questionsDef[$aux] = $aux;
+    }
+}
 
 class ValidatorException extends Exception { }
 
 class Validator{
     protected $questions;
-    protected $questionsDef = ["question_1" => 'question_1'];
 
     public function __construct($questions)
     {
@@ -14,12 +22,24 @@ class Validator{
     }
 
     public function testAll(){
-        return;
+        global $questionsDef;
+
+        $response = [];
+        foreach($questionsDef as $index => $question){
+            $response[] = $this->test($index);
+        }
+
+        return $response;
+    }
+
+    private function getIndexQuestion(string $question){
+        return substr($question, -1) - 1;
     }
 
     public function test(string $nameQuestion){
-        $question = $this->questions[$nameQuestion];
-        $questionFunction = $this->questionsDef[$nameQuestion];
+        global $questionsDef;
+        $question = $this->questions[$this->getIndexQuestion($nameQuestion)];
+        $questionFunction = $questionsDef[$nameQuestion];
 
         if (!$question){
             throw new ValidatorException("Question doesn't exists.");
@@ -33,16 +53,19 @@ class Validator{
 
         foreach($question->getTests() as $test){
             $args = $test->getArgs();
+            $expectedResult = $test->getResult();
             $results = $questionFunction(...$test->getArgs());
-            $args = implode(',',$args);
-            $response[$nameQuestion][] = ['args' => $args, 'results' => $results];
+            $args = json_encode($args);
+            $response[] = [
+                'args' => $args,
+                'expected_result' => $expectedResult,
+                'result' => $results,
+                'passed' => $results == $expectedResult
+            ];
         }
         
-        echo json_encode($response);
+        return $response;
     }
-
-    
-
 }
 
 

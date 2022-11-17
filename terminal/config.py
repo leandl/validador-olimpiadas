@@ -5,6 +5,7 @@ root_dirname_project_validator = path.abspath(path.join(root_dirname, pardir))
 root_dirname_generate_setup = path.abspath(path.join(root_dirname_project_validator, "generate-setup"))
 
 path_file_json_data = path.join(root_dirname_project_validator, "data.json")
+path_file_php_validator = path.join(root_dirname_project_validator, "validator", "php", "main.php")
 path_file_json_config = path.join(root_dirname_project_validator, "config.json")
 
 class Config:
@@ -15,5 +16,6 @@ class Config:
 
   file = {
     "JSON-DATA": path_file_json_data,
-    "CONFIG": path_file_json_config
+    "CONFIG": path_file_json_config,
+    "PHP-VALIDATOR": path_file_php_validator
   }

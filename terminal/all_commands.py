@@ -11,7 +11,6 @@ list_commands = ListCommands()
 def valid_support_lang(lang: str):
   return lang in SupporttedLangs.all_langs()
 
-
 @list_commands.add(["-h"])
 @list_commands.add(["--help"])
 def helper(_args: List[str]):
@@ -24,9 +23,13 @@ def helper(_args: List[str]):
 
 @list_commands.add(["test", valid_support_lang, "all"])
 def validator_all(args: List[str]):
+  lang = args[1]
+  path = Config.file["PHP-VALIDATOR"]
+  response = str(os.popen(f"{Runtime.PHP} {path} all testAll").read())
+  
   return (
     "ERROR",
-    args
+    response
   )
   
 @list_commands.add(["generate", "setup", valid_support_lang])
