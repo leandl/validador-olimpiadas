@@ -34,7 +34,7 @@ class Terminal:
             sys.exit(0)
 
         if '-l' in param or '--lang' in param:
-            lang = str(param['-c'] if ('-c' in param) else param['--lang'])
+            lang = str(param['-l'] if ('-l' in param) else param['--lang'])
         
         return {
             "lang": lang
