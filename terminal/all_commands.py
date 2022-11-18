@@ -12,6 +12,9 @@ list_commands = ListCommands()
 def valid_support_lang(lang: str):
   return lang in SupporttedLangs.all_langs()
 
+def valid_question(question: str):
+  return question.isnumeric() 
+
 @list_commands.add(["exit"])
 def clear(_args: List[str]):
   sys.exit(0)
@@ -35,11 +38,29 @@ def helper(_args: List[str]):
     test <lang-option> all | executa todos os testes"""
   )
 
+@list_commands.add(["test", valid_support_lang, "-question", valid_question])
+def validator_all(args: List[str]):
+  lang = args[1]
+  question = args[3]
+  path = Config.file["PHP-VALIDATOR"]
+  json_path = Config.file["JSON-DATA"]
+  exam_path = Config.path["EXAM"]
+  
+  response = str(os.popen(f"{Runtime.PHP} \"{path}\" --question=question{question} --json-data=\"{json_path}\" --exam-path=\"{exam_path}\"").read())
+  
+  return (
+    "ERROR",
+    response
+  )
+
 @list_commands.add(["test", valid_support_lang, "all"])
 def validator_all(args: List[str]):
   lang = args[1]
   path = Config.file["PHP-VALIDATOR"]
-  response = str(os.popen(f"{Runtime.PHP} {path} all testAll").read())
+  json_path = Config.file["JSON-DATA"]
+  exam_path = Config.path["EXAM"]
+  
+  response = str(os.popen(f"{Runtime.PHP} \"{path}\" --json-data=\"{json_path}\" --exam-path=\"{exam_path}\"").read())
   
   return (
     "ERROR",

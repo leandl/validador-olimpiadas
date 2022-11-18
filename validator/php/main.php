@@ -1,16 +1,15 @@
 <?php
+include_once 'terminal.php';
+
+list($pathjson, $pathexam, $questionArgs) = Terminal::getParams();
+
 include_once 'src/validator.php';
 include_once 'src/question.php';
 include_once 'src/test.php';
 
-if(!isset($argv[1]) || !$argv[2]){
-    throw new Exception('Args not valid.');
-}
+$method = $questionArgs ? 'test' : 'testAll';
 
-$questionArg = $argv[1];
-$method = $argv[2];
-
-$jsonQuestions = json_decode(file_get_contents(__DIR__ .'/../../data.json'));
+$jsonQuestions = json_decode(file_get_contents($pathjson));
 $questions = [];
 
 foreach($jsonQuestions as $keyQuestion => $question){
@@ -21,5 +20,5 @@ foreach($jsonQuestions as $keyQuestion => $question){
 }
 
 $validator = new Validator($questions);
-$result = $validator->$method($questionArg);
-echo json_encode($result);
+$result = $validator->$method($questionArgs);
+echo json_encode(['status' => 'success', 'result' => $result]);
