@@ -40,3 +40,16 @@ class CommandLine:
       command = f"{command} --question=question{number_question}"
 
     return CommandLine.__exec(command)
+
+
+  @staticmethod
+  def valid_test_python(number_question: int = None) -> str:
+    path = Config.file["PYTHON-VALIDATOR"]
+    json_path = Config.file["JSON-DATA"]
+    exam_path = Config.path["EXAM"]
+    
+    command = f"{Runtime.PYTHON} \"{path}\" --json-data=\"{json_path}\" --exam-path=\"{exam_path}\""
+    if number_question:
+      command = f"{command} --question=question_{number_question}"
+
+    return CommandLine.__exec(command)

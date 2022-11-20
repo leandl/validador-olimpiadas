@@ -12,6 +12,7 @@ def get_command_line_valid_test_by_lang(lang: str):
   command_line_valid_test = {
     SupporttedLangs.PHP.value: CommandLine.valid_test_php,
     SupporttedLangs.JAVASCRIPT.value: CommandLine.valid_test_javascript,
+    SupporttedLangs.PYTHON.value: CommandLine.valid_test_python
   }
 
   return command_line_valid_test.get(lang)

@@ -1,49 +1,37 @@
 import getopt
 import sys
 
+from src.printer import Printer
+
 class Terminal:
-
-    def __show_usage():
-        print(f"validador - Versao: [0.1.0]")
-        print('-h, --help                                   | Ajuda')
-        print('-v, --version                                | Versao do aplicativo')
-        print('-c \{OPTION\}, --config=\{OPTION\}           | Configuracao que sera usada. Ex: /default.env ou /database/full.env')
-        print('-e \{OPTION\}, --execute-on-alert=\{OPTION\} | Executar script em alerta? SIM/NAO, padrao NAO.')
     
-
+    @staticmethod
     def get_params():
 
         try:
-            opts, args = getopt.getopt(sys.argv[1:], 'hvc:e:', ['help', 'version', 'config=', 'execute-on-alert='])
-
+            opts, args = getopt.getopt(sys.argv[1:], 'q::j:e:', ['question=', 'json-data=', 'exam-path='])
         except getopt.GetoptError as e:
             print('Ocorreu um erro ao identificar os parametros. Erro:[{}]'.format(e))
             sys.exit(2)
 
-        
-        name_file_config = False
-        execute_on_alert = False
-
         param = {}
-        print(opts)
+        args = {}
+
         for opt, arg in opts:
             param[opt] = arg
 
-        if '-v' in param or '--version' in param:
-            print('version: 0.1.0')
-            sys.exit(0)
+        args["question"] = None
+        if '-q' in param or '--question' in param:
+            args["question"] = str(param['-q'] if ('-q' in param) else param['--question'])
 
-        if '-h' in param or '--help' in param:
-            Terminal.__show_usage()
-            sys.exit(0)
-
-        if '-c' in param or '--config' in param:
-            name_file_config = str(param['-c'] if ('-c' in param) else param['--config'])
-            print(f'--config: {name_file_config}')
-
+        if '-j' in param or '--json-data' in param:
+            args["json-data"] = str(param['-j'] if ('-j' in param) else param['--json-data'])
+        else:
+            Printer.error('Invalid json path specified.')
         
-        if '-e' in param or '--execute-on-alert' in param:
-            execute_on_alert = str(param['-e'] if ('-e' in param) else param['--execute-on-alert'])
-            execute_on_alert = execute_on_alert.upper() == 'SIM'
-            print(f"--execute-on-alert: {execute_on_alert}")
+        if '-e' in param or '--exam-path' in param:
+            args["exam-path"] = str(param['-e'] if ('-e' in param) else param['--exam-path'])
+        else:
+            Printer.error('Invalid exam path specified.')
         
+        return args

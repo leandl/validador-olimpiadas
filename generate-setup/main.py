@@ -19,7 +19,7 @@ generators = {
 
 terminal_params = Terminal.get_params()
 lang = terminal_params.get("lang", None)
-if not lang in generators.keys():
+if lang not in generators.keys():
   print("Lingua não suportada")
   sys.exit(0)
 
