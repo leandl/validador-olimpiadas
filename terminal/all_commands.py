@@ -4,10 +4,17 @@ from typing import List
 
 from entities.list_commands import ListCommands
 from entities.supportted_langs import SupporttedLangs
-from config import Config
-from entities.runtime import Runtime
+from entities.command_line import CommandLine
 
 list_commands = ListCommands()
+
+def get_command_line_valid_test_by_lang(lang: str):
+  command_line_valid_test = {
+    SupporttedLangs.PHP.value: CommandLine.valid_test_php,
+    SupporttedLangs.JAVASCRIPT.value: CommandLine.valid_test_javascript,
+  }
+
+  return command_line_valid_test.get(lang)
 
 def valid_support_lang(lang: str):
   return lang in SupporttedLangs.all_langs()
@@ -42,12 +49,9 @@ def helper(_args: List[str]):
 def validator_all(args: List[str]):
   lang = args[1]
   question = args[3]
-  path = Config.file["PHP-VALIDATOR"]
-  json_path = Config.file["JSON-DATA"]
-  exam_path = Config.path["EXAM"]
-  
-  response = str(os.popen(f"{Runtime.PHP} \"{path}\" --question=question{question} --json-data=\"{json_path}\" --exam-path=\"{exam_path}\"").read())
-  
+  command_line_valid_test = get_command_line_valid_test_by_lang(lang)
+
+  response = command_line_valid_test(question)
   return (
     "ERROR",
     response
@@ -56,25 +60,19 @@ def validator_all(args: List[str]):
 @list_commands.add(["test", valid_support_lang, "all"])
 def validator_all(args: List[str]):
   lang = args[1]
-  path = Config.file["PHP-VALIDATOR"]
-  json_path = Config.file["JSON-DATA"]
-  exam_path = Config.path["EXAM"]
+  command_line_valid_test = get_command_line_valid_test_by_lang(lang)
   
-  response = str(os.popen(f"{Runtime.PHP} \"{path}\" --json-data=\"{json_path}\" --exam-path=\"{exam_path}\"").read())
-  
+  response = command_line_valid_test()
   return (
     "ERROR",
     response
   )
+
   
 @list_commands.add(["generate", "setup", valid_support_lang])
 def generate_setup(args: List[str]):
   lang = args[2]
-
-  path_file_generate_setup = os.path.join(Config.path["GENERATE-SETUP"], "main.py")
-  command = f"{Runtime.PYTHON} \"{path_file_generate_setup}\" --lang={lang}"
-
-  response = str((os.popen(command).read()))
+  response = CommandLine.generate_setup(lang)
 
   return (
     "DEFAULT",

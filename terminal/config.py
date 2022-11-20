@@ -7,6 +7,7 @@ root_dirname_exam = path.abspath(path.join(root_dirname_project_validator, "exam
 
 path_file_json_data = path.join(root_dirname_project_validator, "data.json")
 path_file_php_validator = path.join(root_dirname_project_validator, "validator", "php", "main.php")
+path_file_javascript_validator = path.join(root_dirname_project_validator, "validator", "javascript", "main.js")
 path_file_json_config = path.join(root_dirname_project_validator, "config.json")
 
 class Config:
@@ -20,4 +21,5 @@ class Config:
     "JSON-DATA": path_file_json_data,
     "CONFIG": path_file_json_config,
     "PHP-VALIDATOR": path_file_php_validator,
+    "JAVASCRIPT-VALIDATOR": path_file_javascript_validator
   }

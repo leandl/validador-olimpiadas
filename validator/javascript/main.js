@@ -1,15 +1,19 @@
-const { Question } = require("./src/question");
-const { Test } = require("./src/test");
+const { Printer } = require("./src/printer");
+const { Terminal } = require("./src/terminal");
 const { Validator } = require("./src/validator");
 
-const dataQuestions = require("./data.json");
+const { generateDataQuestions } = require("./src/generate-data-questions");
+const { getQuestionsFunction } = require("./src/get-question-function");
 
-const questions = {}
+const { pathExam, pathJSON, question } = Terminal.getParams();
 
-for (const [keyQuestion, question] of Object.entries(dataQuestions)) {
-    const tests = question.tests.map(({ args, result }) => new Test(args, result));
-    questions[keyQuestion] = new Question(keyQuestion, tests);
-}
+const dataQuestions = require(pathJSON);
+const questions = generateDataQuestions(dataQuestions);
+const questionsFunction = getQuestionsFunction(pathExam);
 
-validator = new Validator(questions)
-validator.test("question_1")
+const validator = new Validator(questions, questionsFunction)
+const result = (question) 
+    ? validator.test(question)
+    : validator.testAll();
+
+Printer.success(result)

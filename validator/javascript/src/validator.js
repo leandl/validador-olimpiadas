@@ -1,36 +1,49 @@
-const { question_1 } = require("../exam/question_1.js");
+const { Printer } = require("./printer");
 
-const questionsFunction = {
-    "question_1": question_1
-}
-
-class ValidatorError extends Error {}
 class Validator {
-    constructor(questions) {
-        this.questions = questions
+    constructor(questions, questionsFunction) {
+        this.questions = questions;
+        this.questionsFunction = questionsFunction;
     }
 
+    testAll() {
+        return Object
+            .entries(this.questionsFunction)
+            .map(
+                ([nameQuestion, _questionFunction]) => this.test(nameQuestion)
+            );
+    }
+    
+    #getIndexQuestion(nameQuestion) {
+        const numberQuestion = Number(nameQuestion.slice(-1));
+        return numberQuestion - 1;
+    }
+        
     test(nameQuestion) {
+        const indexQuestion = this.#getIndexQuestion(nameQuestion);
 
-        const question = this.questions[nameQuestion];
-        const questionFunction = questionsFunction[nameQuestion];
+        const question = this.questions[indexQuestion];
+        const questionFunction = this.questionsFunction[nameQuestion];
         
         if (!question) {
-            throw new ValidatorError("not existis question");
+            Printer.error("not existis question");
         }
             
         if (!questionFunction) {
-            throw new  ValidatorError("not existis question function");
+            Printer.error("not existis question function");
         }
-            
-        for (const test of question.getTests()) {
-            console.log("=====================");
-            console.log(`Args: ${test.getArgs()}`);
-            console.log(`Expected Result: ${test.getResult()}`);
-            
+
+        return question.getTests().map((test) => {
             const result = questionFunction(...test.getArgs());
-            console.log(`Result: ${result}`);
-        }
+            const expectedResult =test.getResult();
+
+            return {
+                'args': test.getArgs(),
+                'expected_result': expectedResult,
+                'result': result,
+                'passed': result == expectedResult
+            }
+        });
     } 
 }
 
