@@ -42,11 +42,19 @@ def helper(_args: List[str]):
   return (
     "DEFAULT",
     """commands:
-    -h | retorna os comandos,
-    test <lang-option> all | executa todos os testes"""
+    -h | retorna os comandos.
+    --help | retorna os comandos.
+    cls | limpa o terminal.
+    clear | limpa o terminal.
+    exit | fecha o programa.
+    generate setup <lang-option> | cria as provas.
+    test <lang-option> all | executa todos os testes.
+    test <lang-option> -q <number-question> | executa um questão especifica.
+    test <lang-option> --question <number-question> | executa um questão especifica."""
   )
 
-@list_commands.add(["test", valid_support_lang, "-question", valid_question])
+@list_commands.add(["test", valid_support_lang, "-q", valid_question])
+@list_commands.add(["test", valid_support_lang, "--question", valid_question])
 def validator_all(args: List[str]):
   lang = args[1]
   question = args[3]
