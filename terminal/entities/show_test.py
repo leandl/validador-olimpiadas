@@ -2,8 +2,6 @@ import json
 from .bcolors import BColors
 from .terminal_messages import TerminalMessages
 
-
-
 def treat_data(f):
   def wapper_decorator(json_data: str):
     try: 
@@ -44,4 +42,22 @@ class ShowTest:
 
     print("==============================")
     print("Tudo OK" if questions == questions_ok else f"{questions_ok}/{questions} questões OK")
+      
+  @staticmethod
+  @treat_data
+  def unit_test(question):
+    for number_test, test in enumerate(question, start=1):
+      if test.get("passed", False):
+        OK = BColors.OKGREEN + "OK" + BColors.DEFAULT
+        print(f"Teste {number_test}: {OK}")
+        continue
+
+      expected_result = test.get("expected_result")
+      result = test.get("result")
+
+      TerminalMessages.error("-----------------------------")
+      TerminalMessages.error(f"Teste {number_test}:")
+      TerminalMessages.error(f"Esperado: {expected_result}")
+      TerminalMessages.error(f"Retorno: {result}")
+      TerminalMessages.error("-----------------------------")
       

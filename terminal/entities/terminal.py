@@ -10,7 +10,7 @@ message_type = {
   "ERROR" : TerminalMessages.error,
   "SUCCESS" : TerminalMessages.success,
   "SHOW-ALL-TEST": ShowTest.all_test,
-  "SHOW-UNIT-TEST": lambda x: x,
+  "SHOW-UNIT-TEST": ShowTest.unit_test,
   "SHOW-UNIT-TEST-DETAIL": lambda x: x,
 }
 
