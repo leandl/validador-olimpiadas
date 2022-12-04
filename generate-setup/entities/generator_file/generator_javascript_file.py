@@ -3,6 +3,17 @@ from os import path
 
 from .generator_file import GeneratorFile
 
+params_type = {
+  "INTEGER": "number",
+  "FLOAT": "number",
+  "STRING": "string",
+  "BOOLEAN": "boolean",
+  "INTEGER-ARRAY": "number[]",
+  "FLOAT-ARRAY": "number[]",
+  "STRING-ARRAY": "string[]",
+  "BOOLEAN-ARRAY": "boolean[]",
+}
+
 class GeneratorJavascriptFile(GeneratorFile):
 
   def __init__(self, path_templates: str) -> None:
@@ -10,10 +21,7 @@ class GeneratorJavascriptFile(GeneratorFile):
     super().__init__(path_template_javascript)
 
   def __convert_type(self, param_type):
-    if param_type == "INTEGER":
-      return "number"
-
-    return "string"
+    return params_type.get(param_type, "unknown")
 
   def __convert_params_function(self, params):
     return ", ".join([ param["name"] for param in params ])

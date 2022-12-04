@@ -1,3 +1,4 @@
+{import-typing-list}
 """
 Nome: {name}
 Descrição: {description}
