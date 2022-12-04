@@ -1,0 +1,47 @@
+import json
+from .bcolors import BColors
+from .terminal_messages import TerminalMessages
+
+
+
+def treat_data(f):
+  def wapper_decorator(json_data: str):
+    try: 
+      data_terminal = json.loads(json_data)
+      if data_terminal.get("status", "error") == "error":
+        return TerminalMessages.error(
+          data_terminal.get("message", "Ocorreu um erro na execução.")
+        )
+        
+
+      if not data_terminal.get("result", None):
+        return TerminalMessages.error(
+          "Não foi possivel obter os dados dos testes"
+        )
+        
+      
+      f(data_terminal.get("result"))
+    except Exception as e:
+      TerminalMessages.error(json_data)
+
+  return wapper_decorator
+
+class ShowTest:
+
+  @staticmethod
+  @treat_data
+  def all_test(data):
+    questions = len(data)
+    questions_ok = 0
+    for number_question, question in enumerate(data, start=1):
+      total_test = len(question)
+      total_test_passed = len([test for test in question if test.get("passed", False)])
+      
+      questions_ok += 1 if total_test == total_test_passed else 0
+      porcent = BColors.OKGREEN + "OK" + BColors.DEFAULT if total_test == total_test_passed else f"{total_test_passed}/{total_test}"
+
+      print(f"Questão {number_question}: {porcent}")
+
+    print("==============================")
+    print("Tudo OK" if questions == questions_ok else f"{questions_ok}/{questions} questões OK")
+      

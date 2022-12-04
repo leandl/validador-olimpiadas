@@ -3,11 +3,15 @@ from typing import List
 from .command import Command
 from .list_commands import ListCommands
 from .terminal_messages import TerminalMessages
+from .show_test import ShowTest
 
 message_type = {
   "DEFAULT": TerminalMessages.message,
   "ERROR" : TerminalMessages.error,
-  "SUCCESS" : TerminalMessages.success
+  "SUCCESS" : TerminalMessages.success,
+  "SHOW-ALL-TEST": ShowTest.all_test,
+  "SHOW-UNIT-TEST": lambda x: x,
+  "SHOW-UNIT-TEST-DETAIL": lambda x: x,
 }
 
 class Terminal:
@@ -57,5 +61,5 @@ class Terminal:
       action = command.get_action()
 
       t, result = action(args)
-
-      message_type[t](result)
+      show_messge = message_type.get(t, message_type["DEFAULT"])
+      show_messge(result)

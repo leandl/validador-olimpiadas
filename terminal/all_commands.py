@@ -62,7 +62,20 @@ def validator_all(args: List[str]):
 
   response = command_line_valid_test(question)
   return (
-    "ERROR",
+    "SHOW-UNIT-TEST",
+    response
+  )
+
+@list_commands.add(["test", valid_support_lang, "-q", valid_question, "-d"])
+@list_commands.add(["test", valid_support_lang, "--question", valid_question, "--detail"])
+def validator_all(args: List[str]):
+  lang = args[1]
+  question = args[3]
+  command_line_valid_test = get_command_line_valid_test_by_lang(lang)
+
+  response = command_line_valid_test(question)
+  return (
+    "SHOW-UNIT-TEST-DETAIL",
     response
   )
 
@@ -73,7 +86,7 @@ def validator_all(args: List[str]):
   
   response = command_line_valid_test()
   return (
-    "ERROR",
+    "SHOW-ALL-TEST",
     response
   )
 
