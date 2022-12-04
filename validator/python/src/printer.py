@@ -18,7 +18,7 @@ class Printer:
   def success(result):
     data_return = {
       "status": "success", 
-      "result ": result 
+      "result": result 
     }
 
     print(json.dumps(data_return))
