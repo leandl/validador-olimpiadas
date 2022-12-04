@@ -11,7 +11,7 @@ message_type = {
   "SUCCESS" : TerminalMessages.success,
   "SHOW-ALL-TEST": ShowTest.all_test,
   "SHOW-UNIT-TEST": ShowTest.unit_test,
-  "SHOW-UNIT-TEST-DETAIL": lambda x: x,
+  "SHOW-UNIT-TEST-DETAIL": ShowTest.unit_test_detail,
 }
 
 class Terminal:

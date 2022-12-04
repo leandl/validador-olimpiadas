@@ -61,3 +61,25 @@ class ShowTest:
       TerminalMessages.error(f"Retorno: {result}")
       TerminalMessages.error("-----------------------------")
       
+
+  @staticmethod
+  @treat_data
+  def unit_test_detail(question):
+    for number_test, test in enumerate(question, start=1):
+      expected_result = test.get("expected_result")
+      result = test.get("result")
+      
+      if test.get("passed", False):
+        OK = BColors.OKGREEN + "OK" + BColors.DEFAULT
+        TerminalMessages.message("-----------------------------")
+        TerminalMessages.message(f"Teste {number_test}: {OK}")
+        TerminalMessages.message(f"Esperado: {expected_result}")
+        TerminalMessages.message(f"Retorno: {result}")
+        TerminalMessages.message("-----------------------------")
+        continue
+
+      TerminalMessages.error("-----------------------------")
+      TerminalMessages.error(f"Teste {number_test}:")
+      TerminalMessages.error(f"Esperado: {expected_result}")
+      TerminalMessages.error(f"Retorno: {result}")
+      TerminalMessages.error("-----------------------------")
