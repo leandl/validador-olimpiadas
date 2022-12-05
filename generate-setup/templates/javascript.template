@@ -6,7 +6,7 @@ Descrição:
 Paramatros: 
 {params-description}
 
-Retorno: {type-return}
+Retorno: {type-return} - {description-return}
 */
 function {name-question}({params}) {
     return;

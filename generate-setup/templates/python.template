@@ -7,7 +7,7 @@ Descrição:
 Paramatros: 
 {params-description}
 
-Retorno: {type-return}
+Retorno: {type-return} - {description-return}
 """
 def {name-question}({params}) -> {type-return}:
     return None

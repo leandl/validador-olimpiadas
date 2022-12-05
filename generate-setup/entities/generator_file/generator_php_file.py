@@ -60,14 +60,22 @@ class GeneratorPHPFile(GeneratorFile):
     name_file = f"question{number_question}.php"
     name_question = f"question{number_question}"
 
+    name = question["name"]
+    description = question["description"]
+
+    description_result = question.get("description-result", "")
     type_result = self.__convert_type_in_function(question["type-result"])
+
     params_description = self.__convert_params_description(question["params"])
     params_function = self.__convert_params_function(question["params"])
 
-    new_file = self._template.replace("{name}", question["name"])
-    new_file = new_file.replace("{description}", question["description"])
+    new_file = self._template.replace("{name}", name)
+    new_file = new_file.replace("{description}", description)
+
     new_file = new_file.replace("{params-description}", params_description)
     new_file = new_file.replace("{type-return}", type_result)
+    new_file = new_file.replace("{description-return}", description_result)
+    
     new_file = new_file.replace("{name-question}", name_question)
     new_file = new_file.replace("{params}", params_function)
 
