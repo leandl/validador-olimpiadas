@@ -1,7 +1,8 @@
 {import-typing-list}
 """
 Nome: {name}
-Descrição: {description}
+Descrição:
+{description}
 
 Paramatros: 
 {params-description}
