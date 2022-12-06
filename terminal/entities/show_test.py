@@ -57,8 +57,8 @@ class ShowTest:
 
       TerminalMessages.error("-----------------------------")
       TerminalMessages.error(f"Teste {number_test}:")
-      TerminalMessages.error(f"Esperado: {expected_result}")
-      TerminalMessages.error(f"Retorno: {result}")
+      TerminalMessages.error(f"Esperado: {repr(expected_result)}")
+      TerminalMessages.error(f"Retorno: {repr(result)}")
       TerminalMessages.error("-----------------------------")
       
 
@@ -73,13 +73,13 @@ class ShowTest:
         OK = BColors.OKGREEN + "OK" + BColors.DEFAULT
         TerminalMessages.message("-----------------------------")
         TerminalMessages.message(f"Teste {number_test}: {OK}")
-        TerminalMessages.message(f"Esperado: {expected_result}")
-        TerminalMessages.message(f"Retorno: {result}")
+        TerminalMessages.message(f"Esperado: {repr(expected_result)}")
+        TerminalMessages.message(f"Retorno: {repr(result)}")
         TerminalMessages.message("-----------------------------")
         continue
 
       TerminalMessages.error("-----------------------------")
       TerminalMessages.error(f"Teste {number_test}:")
-      TerminalMessages.error(f"Esperado: {expected_result}")
-      TerminalMessages.error(f"Retorno: {result}")
+      TerminalMessages.error(f"Esperado: {repr(expected_result)}")
+      TerminalMessages.error(f"Retorno: {repr(result)}")
       TerminalMessages.error("-----------------------------")
