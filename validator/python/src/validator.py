@@ -13,7 +13,7 @@ class Validator:
         return [self.test(name_question) for name_question in self.__questions_def.keys()]
 
     def __get_index_question(self, name_question: str) -> int:
-        number_question = int(name_question[-1])
+        number_question = int(''.join(c for c in name_question if c.isdigit()))
         return number_question - 1
         
     def test(self, name_question: str): 
@@ -21,7 +21,7 @@ class Validator:
 
         question = self.__questions[index_question]
         question_def = self.__questions_def.get(name_question)
-
+        
         if not question:
             Printer.error("not existis question")
 

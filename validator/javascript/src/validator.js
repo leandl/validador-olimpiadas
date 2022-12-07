@@ -15,7 +15,7 @@ class Validator {
     }
     
     #getIndexQuestion(nameQuestion) {
-        const numberQuestion = Number(nameQuestion.slice(-1));
+        const numberQuestion = Number(nameQuestion.replace(/[^0-9]/g,''));
         return numberQuestion - 1;
     }
         

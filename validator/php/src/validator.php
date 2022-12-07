@@ -42,14 +42,14 @@ class Validator
 
     private function getIndexQuestion(string $question)
     {
-        return substr($question, -1) - 1;
+        return preg_replace("/[^0-9]/", "", $question) - 1;
     }
 
     public function test(string $nameQuestion)
     {
         global $questionsDef;
         $index = $this->getIndexQuestion($nameQuestion);
-
+        
         if (!isset($this->questions[$index])) {
             echo json_encode(['status' => 'error', 'message' => "Question doesn't exists."]);
             die;
