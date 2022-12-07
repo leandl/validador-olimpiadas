@@ -317,5 +317,128 @@
                 "result": "186768/14322 = 31128/2387"
             }
         ]
+    },
+    {
+        "name": "Compondo Jingles",
+        "description": "Marcos está dando seus primeiros passos para aprender composição de Jingles. Mas ele está tendo muita dificuldade para obter resultados, mas pelo menos ele está conseguindo produzir melodias atraentes.\nNa música, cada nota tem seu tom (sua frequência, resultando o quão alto ou baixo é seu som) e sua duração (quão longa a nota deve ser). Neste problema estamos interessados apenas na duração das notas.\nUm jingle é dividido numa sequência de compassos, e o compasso é formado por uma série de notas.\nA duração da nota é dada pelo seu formato. Neste problema nós vamos utilizar letras em maiúsculo para indicar a duração das notas. A lista a seguir contém o valor de cada nota disponível (PDF).A duração do compasso é a soma das durações de notas do mesmo. No Jingle de Marcos, cada compasso tem a mesma duração. Como Marcos ainda é um iniciante, o seu famoso professor Johann Sebastian III ensinou a ele que a duração de todo compasso deve ser 1.\nPor exemplo, Marcos escreveu uma composição de 5 compassos, na qual os 4 primeiros contém a duração correta e o último contém a duração incorreta. No exemplo abaixo, cada compasso está separado por uma barra, e cada nota está sendo representada por uma letra da tabela acima.\n/HH/QQQQ/XXXTXTEQH/W/HW/\nMarcos gosta de programação tanto quanto música. Ele quer escrever um programa que determina, para cada uma de suas composições, quais compassos têm a duração correta.\n",
+        "type-result": "INTEGER",
+        "description-result": "O programa deverá mostrar o número de compassos correto da composição.",
+        "params": [
+            {
+                "name": "composition",
+                "type": "STRING",
+                "description": "O programa receberá uma string que poderá conter entre 3 a 200 caracteres representando a composição de Marcos. A composição começa e termina com uma barra \"/\". Cada compasso é dividido dentro de uma composição também por uma barra \"/\". Cada nota é representada por uma letra em maiúsculo da tabela apresentada acima. Você deve assumir que cada composição tem pelo menos 1 nota. Todos os caracteres da entrada serão \"/\" ou uma das representações de notas da tabela."
+            }
+        ],
+        "tests": [
+            {
+                "args": [
+                    "/HH/QQQQ/XXXTXTEQH/W/HW/"
+                ],
+                "result": 4
+            },
+            {
+                "args": [
+                    "/W/W/SQHES/"
+                ],
+                "result": 3
+            },
+            {
+                "args": [
+                    "/WE/TEX/THES/"
+                ],
+                "result": 0
+            },
+            {
+                "args": [
+                    "/XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX/"
+                ],
+                "result": 1
+            }
+        ]
+    },
+    {
+        "name": "Xadrez",
+        "description": "Quantas casas brancas e quantas casas pretas contém um tabuleiro de xadrez N x N?",
+        "type-result": "STRING",
+        "description-result": "O programa deverá mostrar o número de casas brancas e o número de casas pretas do tabuleiro.",
+        "params": [
+            {
+                "name": "n",
+                "type": "INTEGER",
+                "description": "O programa receberá N (2 ≤ V ≤ 100)"
+            }
+        ],
+        "tests": [
+            {
+                "args": [
+                    3
+                ],
+                "result": "5 casas brancas e 4 casas pretas"
+            },
+            {
+                "args": [
+                    4
+                ],
+                "result": "8 casas brancas e 8 casas pretas"
+            },
+            {
+                "args": [
+                    5
+                ],
+                "result": "13 casas brancas e 12 casas pretas"
+            },
+            {
+                "args": [
+                    6
+                ],
+                "result": "18 casas brancas e 18 casas pretas"
+            }
+        ]
+    },
+    {
+        "name": "Contador de Dígitos",
+        "description": "Diana está trabalhando para escrever uma lista com todos números inteiros entre A e B. Ela deseja saber a contagem de cada dígito entre 1 e 9 que irá ser utilizado nesta contagem.",
+        "type-result": "STRING",
+        "description-result": "O programa deverá apresentar a contagem de cada dígito entre 1 e 9 da contagem dada entre A e B em uma única linha.",
+        "params": [
+            {
+                "name": "de_ate",
+                "type": "STRING",
+                "description": "O programa deve receber 2 dois números inteiros em forma de string."
+            }
+        ],
+        "tests": [
+            {
+                "args": [
+                    "1 9"
+                ],
+                "result": "0 1 1 1 1 1 1 1 1 1"
+            },
+            {
+                "args": [
+                    "12 321"
+                ],
+                "result": "61 169 163 83 61 61 61 61 61 61"
+            },
+            {
+                "args": [
+                    "12345678 12345679"
+                ],
+                "result": "0 2 2 2 2 2 2 2 1 1"
+            },
+            {
+                "args": [
+                    "1 99992"
+                ],
+                "result": "38889 50000 50000 49999 49999 49999 49999 49999 49999 49971"
+            },
+            {
+                "args": [
+                    "727 10727"
+                ],
+                "result": "3728 4728 4001 4000 4000 4000 4000 4002 4000 4000"
+            }
+        ]
     }
 ]
