@@ -67,6 +67,8 @@ def validator_all(args: List[str]):
   )
 
 @list_commands.add(["test", valid_support_lang, "-q", valid_question, "-d"])
+@list_commands.add(["test", valid_support_lang, "-q", valid_question, "--detail"])
+@list_commands.add(["test", valid_support_lang, "--question", valid_question, "-d"])
 @list_commands.add(["test", valid_support_lang, "--question", valid_question, "--detail"])
 def validator_all(args: List[str]):
   lang = args[1]
