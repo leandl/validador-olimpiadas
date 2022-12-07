@@ -77,7 +77,6 @@ class Validator
             $args = $test->getArgs();
             $expectedResult = $test->getResult();
             $results = $questionFunction(...$test->getArgs());
-            $args = json_encode($args);
             $response[] = [
                 'args' => $args,
                 'expected_result' => $expectedResult,
