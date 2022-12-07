@@ -10,10 +10,19 @@ class Validator:
         self.__questions_def = questions_def
 
     def test_all(self):
-        return [self.test(name_question) for name_question in self.__questions_def.keys()]
+        return [self.__get_info_question(name_question) for name_question in self.__questions_def.keys()]
+
+    def __get_info_question(self, name_question: str):
+        return {
+            "number": self.__get_number_question(name_question),
+            "data": self.test(name_question)
+        }
+
+    def __get_number_question(self, name_question: str) -> int:
+        return int(''.join(c for c in name_question if c.isdigit()))
 
     def __get_index_question(self, name_question: str) -> int:
-        number_question = int(''.join(c for c in name_question if c.isdigit()))
+        number_question = self.__get_number_question(name_question)
         return number_question - 1
         
     def test(self, name_question: str): 

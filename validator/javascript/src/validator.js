@@ -10,12 +10,19 @@ class Validator {
         return Object
             .entries(this.questionsFunction)
             .map(
-                ([nameQuestion, _questionFunction]) => this.test(nameQuestion)
+                ([nameQuestion, _questionFunction]) => ({
+                    number: this.#getNumberQuestion(nameQuestion),
+                    data: this.test(nameQuestion)
+                })
             );
+    }
+
+    #getNumberQuestion(nameQuestion) {
+        return Number(nameQuestion.replace(/[^0-9]/g,''));
     }
     
     #getIndexQuestion(nameQuestion) {
-        const numberQuestion = Number(nameQuestion.replace(/[^0-9]/g,''));
+        const numberQuestion = this.#getNumberQuestion(nameQuestion);
         return numberQuestion - 1;
     }
         
@@ -41,7 +48,7 @@ class Validator {
                 'args': test.getArgs(),
                 'expected_result': expectedResult,
                 'result': result,
-                'passed': result == expectedResult
+                'passed': result === expectedResult
             }
         });
     } 

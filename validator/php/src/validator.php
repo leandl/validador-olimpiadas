@@ -33,16 +33,24 @@ class Validator
         global $questionsDef;
 
         $response = [];
-        foreach ($questionsDef as $index => $question) {
-            $response[] = $this->test($index);
+        foreach ($questionsDef as $nameQuestion => $question) {
+            $response[] = [
+                'number' => $this->getNumberQuestion($nameQuestion),
+                'data' => $this->test($nameQuestion)
+            ];
         }
 
         return $response;
     }
 
-    private function getIndexQuestion(string $question)
+    private function getNumberQuestion(string $nameQuestion)
     {
-        return preg_replace("/[^0-9]/", "", $question) - 1;
+        return (int) preg_replace("/[^0-9]/", "", $nameQuestion);
+    }
+
+    private function getIndexQuestion(string $nameQuestion)
+    {
+        return $this->getNumberQuestion($nameQuestion) - 1;
     }
 
     public function test(string $nameQuestion)
@@ -74,7 +82,7 @@ class Validator
                 'args' => $args,
                 'expected_result' => $expectedResult,
                 'result' => $results,
-                'passed' => $results == $expectedResult
+                'passed' => $results === $expectedResult
             ];
         }
 
