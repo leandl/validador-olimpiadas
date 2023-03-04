@@ -1,3 +1,4 @@
+import readline
 from entities.terminal import Terminal
 from all_commands import list_commands 
   
